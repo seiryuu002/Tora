@@ -17,7 +17,7 @@ namespace Tora.Persistence.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.14");
 
-            modelBuilder.Entity("Tora.Domain.Entities.Comments", b =>
+            modelBuilder.Entity("Tora.Domain.Entities.Comment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -41,7 +41,7 @@ namespace Tora.Persistence.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Tora.Domain.Entities.Projects", b =>
+            modelBuilder.Entity("Tora.Domain.Entities.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -69,13 +69,13 @@ namespace Tora.Persistence.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("Tora.Domain.Entities.Roles", b =>
+            modelBuilder.Entity("Tora.Domain.Entities.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Role")
+                    b.Property<string>("UserRole")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -84,7 +84,7 @@ namespace Tora.Persistence.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("Tora.Domain.Entities.Tasks", b =>
+            modelBuilder.Entity("Tora.Domain.Entities.Task", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -120,7 +120,7 @@ namespace Tora.Persistence.Migrations
                     b.ToTable("Tasks");
                 });
 
-            modelBuilder.Entity("Tora.Domain.Entities.Users", b =>
+            modelBuilder.Entity("Tora.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -148,15 +148,15 @@ namespace Tora.Persistence.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Tora.Domain.Entities.Users", b =>
+            modelBuilder.Entity("Tora.Domain.Entities.User", b =>
                 {
-                    b.HasOne("Tora.Domain.Entities.Roles", "role")
+                    b.HasOne("Tora.Domain.Entities.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("role");
+                    b.Navigation("Role");
                 });
 #pragma warning restore 612, 618
         }
