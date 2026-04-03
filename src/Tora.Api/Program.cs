@@ -1,6 +1,9 @@
+using Tora.Api;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddToraDb();
+
 var app = builder.Build();
-
-app.MapGet("/", () => "Hello World!");
-
+await app.MigrateDatabaseAsync();
 app.Run();
