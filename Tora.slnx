@@ -1,5 +1,9 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/Tora.Api/Tora.Api.csproj" />
+    <Project Path="src/Tora.Application/Tora.Application.csproj" />
+    <Project Path="src/Tora.Domain/Tora.Domain.csproj" />
+    <Project Path="src/Tora.Infrastructure/Tora.Infrastructure.csproj" />
+    <Project Path="src/Tora.Persistence/Tora.Persistence.csproj" />
   </Folder>
 </Solution>
