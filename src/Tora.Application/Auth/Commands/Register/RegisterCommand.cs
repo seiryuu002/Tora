@@ -3,7 +3,7 @@ namespace Tora.Application.Auth.Commands.Register;
 
 public class RegisterCommand : IRequest<string>
 {
-    public string Name { get; set; } = string.Empty;
-    public string Email { get; set; } = string.Empty;
-    public string Password { get; set; } = string.Empty;
+    public required string Name { get; set; }
+    public required string Email { get; set; }
+    public required string Password { get; set; }
 }

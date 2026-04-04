@@ -11,8 +11,8 @@ using Tora.Persistence;
 namespace Tora.Persistence.Migrations
 {
     [DbContext(typeof(ToraDbContext))]
-    [Migration("20260404152400_UpdateModel")]
-    partial class UpdateModel
+    [Migration("20260404201944_IntialCreate")]
+    partial class IntialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

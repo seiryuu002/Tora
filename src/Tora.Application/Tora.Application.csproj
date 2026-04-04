@@ -13,6 +13,7 @@
   <ItemGroup>
     <Folder Include="Auth\" />
     <Folder Include="Auth\Commands\" />
+    <Folder Include="Auth\Commands\Login\" />
     <Folder Include="Auth\Commands\Register\" />
     <Folder Include="DTOs\" />
     <Folder Include="DTOs\Auth\" />

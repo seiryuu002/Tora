@@ -31,7 +31,6 @@ builder.Services.AddAuthentication("Bearer")
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
-await app.MigrateDatabaseAsync();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseAuthentication();

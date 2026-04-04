@@ -1,4 +1,4 @@
-POST  http://localhost:5124/api/Auth/register HTTP/1.1
+POST  http://localhost:5124/tora/Auth/register HTTP/1.1
 Content-Type: application/json
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 ###
 
-POST  http://localhost:5124/api/Auth/login HTTP/1.1
+POST  http://localhost:5124/tora/Auth/login HTTP/1.1
 Content-Type: application/json
 
 {
