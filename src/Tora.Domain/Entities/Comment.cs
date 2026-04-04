@@ -4,10 +4,10 @@ namespace Tora.Domain.Entities;
 
 public class Comment
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public required string Content { get; set; }
-    public int TaskId { get; set; }
-    public int UserId { get; set; }
+    public Guid TaskId { get; set; }
+    public Guid UserId { get; set; }
     public DateTime CreatedAt { get; set; }
 
 }
