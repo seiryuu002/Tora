@@ -2,13 +2,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tora.Domain\Tora.Domain.csproj" />
+    <ProjectReference Include="..\Tora.Persistence\Tora.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.1.0" />
     <PackageReference Include="MediatR" Version="14.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Auth\" />
+    <Folder Include="Auth\Commands\" />
+    <Folder Include="Auth\Commands\Register\" />
     <Folder Include="DTOs\" />
     <Folder Include="DTOs\Auth\" />
     <Folder Include="Interfaces\" />

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tora.Persistence;
 
@@ -10,9 +11,11 @@ using Tora.Persistence;
 namespace Tora.Persistence.Migrations
 {
     [DbContext(typeof(ToraDbContext))]
-    partial class ToraDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260404152400_UpdateModel")]
+    partial class UpdateModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.14");
