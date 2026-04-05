@@ -20,18 +20,27 @@ public class JwtService(IConfiguration config) : IJwtService
 
         var claims = new List<Claim>
         {
+            new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new(JwtRegisteredClaimNames.Email, user.Email),
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new(ClaimTypes.Email, user.Email)
+            new(ClaimTypes.Email, user.Email),
+            new(ClaimTypes.Role, user.RoleId.ToString()),
+            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 
-        var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
+        var keyString = _config["Jwt:Key"]?? throw new Exception("Jwt Key not found in configuration");
+        var issuer = _config["Jwt:Issuer"]?? throw new Exception("Jwt Issuer not found in the configuration");
+        var audience = _config["Jwt:Audience"]?? throw new Exception("Jwt Audience not found in the configuration");
+        var expiryHours = _config["Jwt:ExpiryHours"]?? throw new Exception("Jwt ExpiryHours not found in the configuration");
+
+        var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(keyString));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken(
-            issuer: _config["Jwt:Issuer"],
-            audience: _config["Jwt:Audience"],
+            issuer: issuer,
+            audience: audience,
             claims: claims,
-            expires: DateTime.UtcNow.AddHours(2),
+            expires: DateTime.UtcNow.AddHours(int.Parse(expiryHours)),
             signingCredentials: creds);
 
         return new JwtSecurityTokenHandler().WriteToken(token);
