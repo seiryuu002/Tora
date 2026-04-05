@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Tora.Persistence;
+using Tora.Infrastructure;
 
 namespace Tora.Api;
 

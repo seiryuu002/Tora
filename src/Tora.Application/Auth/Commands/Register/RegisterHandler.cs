@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Tora.Persistence;
+using Tora.Infrastructure;
 namespace Tora.Application.Auth.Commands.Register;
 
 public class RegisterHandler(ToraDbContext context) : IRequestHandler<RegisterCommand, string>

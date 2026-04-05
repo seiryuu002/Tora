@@ -1,8 +1,8 @@
 using System;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Tora.Application.Interfaces;
-using Tora.Persistence;
+using Tora.Infrastructure;
+using Tora.Infrastructure.Interfaces;
 
 namespace Tora.Application.Auth.Commands.Login;
 

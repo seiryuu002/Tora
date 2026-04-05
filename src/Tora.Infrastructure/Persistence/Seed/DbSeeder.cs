@@ -1,7 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 using Tora.Domain.Entities;
-using Tora.Persistence;
 
 namespace Tora.Infrastructure.Persistence.Seed;
 

@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tora.Domain\Tora.Domain.csproj" />
-    <ProjectReference Include="..\Tora.Persistence\Tora.Persistence.csproj" />
+    <ProjectReference Include="..\Tora.Infrastructure\Tora.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

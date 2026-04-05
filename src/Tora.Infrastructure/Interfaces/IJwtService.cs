@@ -1,8 +1,9 @@
 using Tora.Domain.Entities;
 
-namespace Tora.Application.Interfaces;
+namespace Tora.Infrastructure.Interfaces;
 
 public interface IJwtService
 {
     string GenerateToken(User user);
 }
+

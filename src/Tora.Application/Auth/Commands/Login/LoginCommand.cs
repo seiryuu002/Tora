@@ -1,7 +1,4 @@
-using System;
 using MediatR;
-using Tora.Application.Interfaces;
-using Tora.Persistence;
 
 namespace Tora.Application.Auth.Commands.Login;
 
