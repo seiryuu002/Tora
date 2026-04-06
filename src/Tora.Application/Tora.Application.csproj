@@ -19,9 +19,8 @@
   <ItemGroup>
     <Folder Include="Common\" />
     <Folder Include="Common\Behaviors\" />
+    <Folder Include="Common\Constants\" />
     <Folder Include="Common\Models\" />
-    <Folder Include="DTOs\" />
-    <Folder Include="DTOs\Auth\" />
     <Folder Include="Features\Auth\Queries\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>

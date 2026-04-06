@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Tora.Application.Features.Auth.Commands.Login;
 using Tora.Application.Features.Auth.Commands.Register;
 using Tora.Application.DTOs.Auth;
-using Tora.Domain.Entities;
+using Tora.Application.Common.Models;
+using Tora.Application.Common.Constants;
 
 namespace Tora.Api.Controllers
 {
@@ -14,37 +15,21 @@ namespace Tora.Api.Controllers
     {
         private readonly IMediator _mediator = mediator;
 
-        [Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = Roles.SuperAdmin)]
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterDto registerDto)
+        public async Task<ActionResult<ApiResponse<string>>> Register(RegisterCommand command)
         {
-            var command = new RegisterCommand
-            {
-                Name = registerDto.Name,
-                Email = registerDto.Email,
-                Password = registerDto.Password
-            };
+            var result = await _mediator.Send(command);
 
-            var userId = await _mediator.Send(command);
-
-            return Created("", new
-            {
-                message = "User registered successfully",
-                userId
-            });
+            return Created(string.Empty, result);
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDto loginDto)
+        public async Task<ActionResult<ApiResponse<AuthResponseDto>>> Login(LoginCommand command)
         {
-            var command = new LoginCommand{
-                Email = loginDto.Email,
-                Password = loginDto.Password
-            };
-            
-            var token = await _mediator.Send(command);
-            return Ok(new { token });
-
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
     }
 }
