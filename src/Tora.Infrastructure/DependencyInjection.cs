@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
+using Tora.Application.Interfaces;
 using Tora.Infrastructure.Persistence.Seed;
 using Tora.Infrastructure.Services;
-using Tora.Infrastructure.Interfaces;
 
 namespace Tora.Infrastructure;
 

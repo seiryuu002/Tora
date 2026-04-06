@@ -1,10 +1,8 @@
-
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Tora.Infrastructure.Interfaces;
-using Tora.Domain.Entities;
+using Tora.Application.Interfaces;
 
 namespace Tora.Infrastructure.Services;
 

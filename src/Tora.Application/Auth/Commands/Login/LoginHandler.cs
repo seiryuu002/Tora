@@ -1,14 +1,13 @@
 using System;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Tora.Infrastructure;
-using Tora.Infrastructure.Interfaces;
+using Tora.Application.Interfaces;
 
 namespace Tora.Application.Auth.Commands.Login;
 
-public class LoginHandler(ToraDbContext dbContext, IJwtService jwtService) : IRequestHandler<LoginCommand, string>
+public class LoginHandler(IToraDbContext dbContext, IJwtService jwtService) : IRequestHandler<LoginCommand, string>
 {
-    private readonly ToraDbContext _dbContext = dbContext;
+    private readonly IToraDbContext _dbContext = dbContext;
     private readonly IJwtService _jwtService = jwtService;
 
     public async Task<string> Handle(LoginCommand request,  CancellationToken ct)

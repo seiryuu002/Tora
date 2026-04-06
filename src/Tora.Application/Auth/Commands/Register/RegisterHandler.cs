@@ -1,11 +1,11 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Tora.Infrastructure;
+using Tora.Application.Interfaces;
 namespace Tora.Application.Auth.Commands.Register;
 
-public class RegisterHandler(ToraDbContext context) : IRequestHandler<RegisterCommand, string>
+public class RegisterHandler(IToraDbContext context) : IRequestHandler<RegisterCommand, string>
 {
-    private readonly ToraDbContext _context = context;
+    private readonly IToraDbContext _context = context;
 
     public async Task<string> Handle(RegisterCommand request, CancellationToken ct)
     {

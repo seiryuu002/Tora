@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\Tora.Application\Tora.Application.csproj" />
     <ProjectReference Include="..\Tora.Domain\Tora.Domain.csproj" />
   </ItemGroup>
 
