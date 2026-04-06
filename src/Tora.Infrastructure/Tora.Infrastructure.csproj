@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\" />
-    <Folder Include="Persistence\" />
+    <Folder Include="Persistence\Configuration\" />
     <Folder Include="Persistence\Seed\" />
     <Folder Include="Services\" />
   </ItemGroup>

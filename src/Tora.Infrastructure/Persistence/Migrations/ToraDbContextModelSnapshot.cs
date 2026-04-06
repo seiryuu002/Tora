@@ -7,7 +7,7 @@ using Tora.Infrastructure;
 
 #nullable disable
 
-namespace Tora.Infrastructure.Migrations
+namespace Tora.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ToraDbContext))]
     partial class ToraDbContextModelSnapshot : ModelSnapshot

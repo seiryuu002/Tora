@@ -8,10 +8,10 @@ using Tora.Infrastructure;
 
 #nullable disable
 
-namespace Tora.Infrastructure.Migrations
+namespace Tora.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ToraDbContext))]
-    [Migration("20260405194543_InitialCreate")]
+    [Migration("20260406062257_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
