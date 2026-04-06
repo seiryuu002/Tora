@@ -4,6 +4,6 @@ namespace Tora.Infrastructure.Interfaces;
 
 public interface IJwtService
 {
-    string GenerateToken(User user);
+    string GenerateToken(string Id, string email, string role);
 }
 

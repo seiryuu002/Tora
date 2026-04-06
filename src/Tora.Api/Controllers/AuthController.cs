@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Tora.Application.Auth.Commands.Login;
 using Tora.Application.Auth.Commands.Register;
 using Tora.Application.DTOs.Auth;
 using Tora.Domain.Entities;
@@ -25,13 +26,25 @@ namespace Tora.Api.Controllers
             };
 
             var userId = await _mediator.Send(command);
-            //logic
 
             return Created("", new
             {
                 message = "User registered successfully",
                 userId
             });
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginDto loginDto)
+        {
+            var command = new LoginCommand{
+                Email = loginDto.Email,
+                Password = loginDto.Password
+            };
+            
+            var token = await _mediator.Send(command);
+            return Ok(new { token });
+
         }
     }
 }

@@ -10,6 +10,6 @@ public static class ToraDbMigrateExtension
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
         builder.Services.AddDbContext<ToraDbContext>(options =>
-        options.UseSqlite(connectionString, b => b.MigrationsAssembly("Tora.Persistence")));
+        options.UseSqlite(connectionString, b => b.MigrationsAssembly("Tora.Infrastructure")));
     }
 }

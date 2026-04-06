@@ -36,6 +36,7 @@ public class DbSeeder(ToraDbContext context)
                 Name = "Owner",
                 Email = "superadmin@tora.com",
                 RoleId = superAdminRole.Id,
+                Role = superAdminRole,
                 Password = BCrypt.Net.BCrypt.HashPassword("SuperAdmin@12345")
             };
             await _context.Users.AddAsync(superAdminUser);

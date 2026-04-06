@@ -16,13 +16,14 @@ public class RegisterHandler(ToraDbContext context) : IRequestHandler<RegisterCo
         }
 
         var role = await _context.Roles
-        .FirstOrDefaultAsync(r => r.UserRole == "User", ct) ?? throw new Exception("Default user role not found");
+        .FirstOrDefaultAsync(r => r.UserRole == "Guest", ct) ?? throw new Exception("Default user role not found");
         
         var user = new Domain.Entities.User
         {
             Id = Guid.NewGuid(),
             Name = request.Name,
             RoleId = role.Id,
+            Role = role,
             Email = request.Email,
             Password = BCrypt.Net.BCrypt.HashPassword(request.Password)
         };
