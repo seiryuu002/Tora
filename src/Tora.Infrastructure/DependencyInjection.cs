@@ -21,6 +21,7 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
         services.AddScoped<IJwtService, JwtService>();
+        services.AddScoped<IHashingService, HashingService>();
         services.AddScoped<DbSeeder>();
         services.AddHostedService<DbSeederHostedService>();
         return services;
