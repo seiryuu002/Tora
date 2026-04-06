@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using Tora.Application.Interfaces;
 using Tora.Domain.Entities;
 
-namespace Tora.Infrastructure;
+namespace Tora.Infrastructure.Persistence;
 
-public class ToraDbContext(DbContextOptions<ToraDbContext> options) : DbContext(options)
+public class ToraDbContext(DbContextOptions<ToraDbContext> options) : DbContext(options), IToraDbContext
 {
     public DbSet<Project> Projects => Set<Project>();
     public DbSet<User> Users => Set<User>();

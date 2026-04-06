@@ -5,8 +5,8 @@ namespace Tora.Application.Interfaces;
 
 public interface IToraDbContext
 {
-    DbSet<User> Users {get; set;}
-    DbSet<Role> Roles {get; set;}
+    DbSet<User> Users {get;}
+    DbSet<Role> Roles {get;}
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 
 }
