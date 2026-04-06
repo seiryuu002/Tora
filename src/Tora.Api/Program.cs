@@ -1,14 +1,13 @@
 using Microsoft.IdentityModel.Tokens;
-using Tora.Api;
 using Tora.Infrastructure;
-using Tora.Application.Auth.Commands.Register;
+using Tora.Api.Middlewares;
+using Tora.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddToraDb();
 builder.Services.AddInfrastructure();
-builder.Services.AddMediatR(cfg => 
-    cfg.RegisterServicesFromAssembly(typeof(RegisterHandler).Assembly));
+builder.Services.AddApplication();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -33,6 +32,7 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
+app.UseMiddleware<GloabalExceptionMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

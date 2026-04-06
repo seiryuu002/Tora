@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Tora.Application.Auth.Commands.Login;
+namespace Tora.Application.Features.Auth.Commands.Login;
 
 public class LoginCommand : IRequest<string>
 {

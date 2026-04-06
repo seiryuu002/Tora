@@ -1,8 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Tora.Application.Auth.Commands.Login;
-using Tora.Application.Auth.Commands.Register;
+using Tora.Application.Features.Auth.Commands.Login;
+using Tora.Application.Features.Auth.Commands.Register;
 using Tora.Application.DTOs.Auth;
 using Tora.Domain.Entities;
 

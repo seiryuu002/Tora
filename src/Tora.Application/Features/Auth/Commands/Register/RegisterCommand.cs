@@ -1,7 +1,8 @@
 using MediatR;
-namespace Tora.Application.Auth.Commands.Register;
+using Tora.Application.Common.Models;
+namespace Tora.Application.Features.Auth.Commands.Register;
 
-public class RegisterCommand : IRequest<string>
+public class RegisterCommand : IRequest<ApiResponse<string>>
 {
     public required string Name { get; set; }
     public required string Email { get; set; }
