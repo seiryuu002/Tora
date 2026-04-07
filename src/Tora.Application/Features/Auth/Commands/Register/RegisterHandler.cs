@@ -2,10 +2,14 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Tora.Application.Common.Models;
+using Tora.Application.DTOs.Auth;
 using Tora.Application.Interfaces;
 namespace Tora.Application.Features.Auth.Commands.Register;
 
-public class RegisterHandler(IToraDbContext context, IHashingService hashingService, ILogger<RegisterHandler> logger) : IRequestHandler<RegisterCommand, ApiResponse<string>>
+public class RegisterHandler(IToraDbContext context, 
+                             IHashingService hashingService, 
+                             ILogger<RegisterHandler> logger) : 
+                             IRequestHandler<RegisterCommand, ApiResponse<string>>
 {
     private readonly IToraDbContext _context = context;
 

@@ -1,7 +1,9 @@
+using Tora.Domain.Entities;
 namespace Tora.Application.Interfaces;
 
 public interface IJwtService
 {
-    string GenerateToken(string id, string email, string role);
+    public string GenerateAccessToken(string Id, string email, string role);
+    public string GenerateRefreshToken();
 }
 

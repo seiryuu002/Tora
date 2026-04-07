@@ -11,5 +11,6 @@ public class ToraDbContext(DbContextOptions<ToraDbContext> options) : DbContext(
     public DbSet<Domain.Entities.Task> Tasks => Set<Domain.Entities.Task>();
     public DbSet<Comment> Comments => Set<Comment>();
     public DbSet<Role> Roles => Set<Role>();
+    public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
 
 }

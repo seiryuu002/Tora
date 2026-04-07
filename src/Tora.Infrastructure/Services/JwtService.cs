@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Tora.Application.Interfaces;
@@ -10,7 +11,7 @@ public class JwtService(IConfiguration config) : IJwtService
 {
     private readonly IConfiguration _config = config;
 
-    public string GenerateToken(string Id, string email, string role)
+    public string GenerateAccessToken(string Id, string email, string role)
     {
         // Implemented JWT token generation logic here
         // This typically involves creating claims based on the user's information,
@@ -42,6 +43,11 @@ public class JwtService(IConfiguration config) : IJwtService
             signingCredentials: creds);
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    public string GenerateRefreshToken()
+    {
+        return Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
     }
 
 }

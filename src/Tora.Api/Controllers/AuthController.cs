@@ -17,7 +17,7 @@ namespace Tora.Api.Controllers
 
         [Authorize(Roles = Roles.SuperAdmin)]
         [HttpPost("register")]
-        public async Task<ActionResult<ApiResponse<string>>> Register(RegisterCommand command)
+        public async Task<ActionResult<ApiResponse<AuthResponseDto>>> Register(RegisterCommand command)
         {
             var result = await _mediator.Send(command);
 
@@ -31,6 +31,14 @@ namespace Tora.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        [AllowAnonymous]
+        [HttpPost("refresh")]
+        public async Task<ActionResult<ApiResponse<AuthResponseDto>>> Refresh(RefreshTokenCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        } 
     }
 }
 
