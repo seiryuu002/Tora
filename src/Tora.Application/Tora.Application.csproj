@@ -21,7 +21,11 @@
     <Folder Include="Common\Behaviors\" />
     <Folder Include="Common\Constants\" />
     <Folder Include="Common\Models\" />
+    <Folder Include="DTOs\Users\" />
     <Folder Include="Features\Auth\Queries\" />
+    <Folder Include="Features\Users\" />
+    <Folder Include="Features\Users\Commands\" />
+    <Folder Include="Features\Users\Queries\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
 
