@@ -13,7 +13,7 @@ public class GloabalExceptionMiddleware(RequestDelegate next, ILogger<GloabalExc
         }
         catch(Exception ex)
         {
-            logger.LogError(ex, "An unhandled exception occured while processing the requrst");
+            logger.LogError(ex, "An unhandled exception occured while processing the request");
 
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
