@@ -5,4 +5,5 @@
     <Project Path="src/Tora.Domain/Tora.Domain.csproj" />
     <Project Path="src/Tora.Infrastructure/Tora.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/test/" />
 </Solution>

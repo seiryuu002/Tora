@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Tora.Application.Interfaces;
+using Tora.Application.Interfaces.Repositories;
 using Tora.Infrastructure.Persistence;
+using Tora.Infrastructure.Persistence.Repositories;
 using Tora.Infrastructure.Persistence.Seed;
 using Tora.Infrastructure.Services;
 
@@ -22,6 +24,7 @@ public static class DependencyInjection
     {
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IHashingService, HashingService>();
+        services.AddScoped<IUserReadService, UserReadService>();
         services.AddScoped<DbSeeder>();
         services.AddHostedService<DbSeederHostedService>();
         return services;

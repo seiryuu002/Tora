@@ -26,7 +26,6 @@
     <Folder Include="Features\Users\" />
     <Folder Include="Features\Users\Commands\" />
     <Folder Include="Features\Users\Queries\" />
-    <Folder Include="Interfaces\" />
   </ItemGroup>
 
   <PropertyGroup>
