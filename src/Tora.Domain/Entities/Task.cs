@@ -1,15 +1,15 @@
-using System.Diagnostics.CodeAnalysis;
 
 namespace Tora.Domain.Entities;
 
-public class Task
+public class Task()
 {
-    public Guid Id { get; set; }
-    public required string Title { get; set; }
-    public required string Description { get; set; }
-    public required string Status { get; set;}
-    public required string Priority { get; set; }
-    public Guid ProjectId { get; set;}
+    public Guid Id { get; private set; }
+    public string? Title { get; private set; }
+    public string? Description { get; private set; }
+    public Enums.TaskStatus Status { get; private set;} = Enums.TaskStatus.NotStarted;
+    public Enums.TaskPriority Priority { get; private set; }
+    public Guid ProjectId { get; private set;}
     public Guid AssignedtoUserId { get; set;}
     public DateTime DueDate { get; set; }
+
 }
