@@ -15,7 +15,7 @@ public static class DependencyInjection
 {
     public static void AddToraDb(this WebApplicationBuilder builder)
     {
-        var connectionString = builder.Configuration.GetConnectionString("DefaultCOnnection");
+        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         builder.Services.AddDbContext<ToraDbContext>(Options => 
             Options.UseSqlite(connectionString, builder => builder.MigrationsAssembly("Tora.Infrastructure")));
         builder.Services.AddScoped<IToraDbContext>(provider => provider.GetRequiredService<ToraDbContext>());
