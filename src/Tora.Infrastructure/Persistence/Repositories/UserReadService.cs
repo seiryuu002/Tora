@@ -17,8 +17,8 @@ public class UserReadService(ToraDbContext dbContext) : IUserReadService
         {
             search = search.ToLower();
             query = query.Where(u => 
-                                u.Name.ToLower().Contains(search) || 
-                                u.Email.ToLower().Contains(search));
+                                u.Name.Contains(search, StringComparison.CurrentCultureIgnoreCase) || 
+                                u.Email.Contains(search, StringComparison.CurrentCultureIgnoreCase));
         }
 
         if (!string.IsNullOrWhiteSpace(role))

@@ -11,20 +11,18 @@ public class RegisterHandler(IToraDbContext context,
                              ILogger<RegisterHandler> logger) : 
                              IRequestHandler<RegisterCommand, ApiResponse<string>>
 {
-    private readonly IToraDbContext _context = context;
-
     public async Task<ApiResponse<string>> Handle(RegisterCommand request, CancellationToken ct)
     {
         logger.LogInformation("Attempting to register the user");
 
-        var exists = await _context.Users.AnyAsync(u => u.Email == request.Email, ct);
+        var exists = await context.Users.AnyAsync(u => u.Email == request.Email, ct);
         if (exists)
         {
             logger.LogWarning("Registeration failed - email already exists {email}", request.Email);
             throw new Exception("User with this email already exists");
         }
 
-        var role = await _context.Roles
+        var role = await context.Roles
         .FirstOrDefaultAsync(r => r.UserRole == "Guest", ct) ?? throw new Exception("Default user role not found");
         
         var hashedPassword = hashingService.Hash(request.Password);
@@ -39,8 +37,8 @@ public class RegisterHandler(IToraDbContext context,
             Password = hashedPassword
         };
 
-        _context.Users.Add(user);
-        await _context.SaveChangesAsync(ct);
+        context.Users.Add(user);
+        await context.SaveChangesAsync(ct);
 
         return ApiResponse<string>.SuccessResponse("User Created");
     }

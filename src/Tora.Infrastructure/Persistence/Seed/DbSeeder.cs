@@ -1,32 +1,31 @@
 using Microsoft.EntityFrameworkCore;
+using Tora.Application.Interfaces;
 using Tora.Domain.Entities;
 
 namespace Tora.Infrastructure.Persistence.Seed;
 
-public class DbSeeder(ToraDbContext context)
+public class DbSeeder(IToraDbContext context, IHashingService hashingService)
 {
-    private readonly ToraDbContext _context = context;
-
-    public async System.Threading.Tasks.Task SeedAsync()
+    public async System.Threading.Tasks.Task SeedAsync(CancellationToken ct)
     {
         var roles = new[] { "SuperAdmin", "Manager", "Developer", "Guest" };
 
         // seed Roles = {"SuperAdmin", "Manager", "Developer", "Guest"}
         foreach ( var role in roles)
         {
-            if (!await _context.Roles.AnyAsync(u => u.UserRole == role))
+            if (!await context.Roles.AnyAsync(u => u.UserRole == role, ct))
             {
-                await _context.Roles.AddAsync(new Role { Id = Guid.NewGuid(), UserRole = role});
+                await context.Roles.AddAsync(new Role { Id = Guid.NewGuid(), UserRole = role}, ct);
             }
         }
 
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync(ct);
 
         // seed a default user with superadmin role
-        var superAdminRole = await _context.Roles.FirstOrDefaultAsync(u => u.UserRole == "SuperAdmin")?? 
+        var superAdminRole = await context.Roles.FirstOrDefaultAsync(u => u.UserRole == "SuperAdmin", ct)?? 
         throw new Exception("SuperAdmin role not found");
 
-        var exists = await _context.Users.AnyAsync(u => u.RoleId == superAdminRole.Id);
+        var exists = await context.Users.AnyAsync(u => u.RoleId == superAdminRole.Id, ct);
 
         if(!exists)
         {
@@ -37,10 +36,10 @@ public class DbSeeder(ToraDbContext context)
                 Email = "superadmin@tora.com",
                 RoleId = superAdminRole.Id,
                 Role = superAdminRole,
-                Password = BCrypt.Net.BCrypt.HashPassword("SuperAdmin@12345")
+                Password = hashingService.Hash("SuperAdmin@12345")
             };
-            await _context.Users.AddAsync(superAdminUser);
-            await _context.SaveChangesAsync();
+            await context.Users.AddAsync(superAdminUser, ct);
+            await context.SaveChangesAsync(ct);
         }
     }
 }
