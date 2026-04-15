@@ -31,7 +31,7 @@ public class LoginHandler(IToraDbContext dbContext,
             throw new BadHttpRequestException("User role is not loaded");
         }
 
-        var newAccessToken = jwtService.GenerateAccessToken(user.Id.ToString(), 
+        var newAccessToken = jwtService.GenerateAccessToken(user.Name, 
                                                             user.Email, user.Role.UserRole);
         var newRefreshToken = jwtService.GenerateRefreshToken();
         var newRefreshTokenEntity = new RefreshToken()

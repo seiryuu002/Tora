@@ -23,7 +23,7 @@ public class RefreshTokenHandler(IToraDbContext dbContext,
                            throw new Exception("Refresh Token expired");
         token.IsRevoked = true;
 
-        var newAccessToken = jwtService.GenerateAccessToken(token.User.Id.ToString(), token.User.Email, token.User.Role!.UserRole);
+        var newAccessToken = jwtService.GenerateAccessToken(token.User.Name, token.User.Email, token.User.Role!.UserRole);
         var unhashedRefreshToken = jwtService.GenerateRefreshToken();
         var newRefreshToken = hashingService.Hash(unhashedRefreshToken);
 
