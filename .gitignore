@@ -59,6 +59,8 @@ appsettings.Development.json
 
 # Ignore local DB files if any
 *.db
+*.db-wal
+*.db-shm
 *.sqlite
 *.sqlite3
 
