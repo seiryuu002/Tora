@@ -1,6 +1,6 @@
 # Tora
 ## what it is
-Tora is a role-based project and task management REST API built with .NET 9 and Clean Architecture. It supports JWT authentication with refresh token rotation, role-based access control (SuperAdmin, Manager, Developer, Guest), and is structured using CQRS with MediatR.
+Tora is a role-based project and task management REST API built with .NET 9 and Clean Architecture. It supports JWT-based authentication with refresh token rotation, role-based access control (SuperAdmin, Manager, Developer, Guest), and is structured with CQRS using MediatR.
 ## Architecture Diagram 
 ```mermaid
 graph TD;
