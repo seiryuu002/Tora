@@ -14,7 +14,7 @@ public class DbSeederHostedService(IServiceProvider serviceProvider) : IHostedSe
         var seeder =  scope.ServiceProvider.GetRequiredService<DbSeeder>();
 
         await context.Database.MigrateAsync(ct);
-        await seeder.SeedAsync();
+        await seeder.SeedAsync(ct);
     }
 
     public Task StopAsync(CancellationToken ct) => Task.CompletedTask;

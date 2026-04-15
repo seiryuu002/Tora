@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Tora.Application.Common.Models;
 using Tora.Application.DTOs.Auth;
 using Tora.Application.Interfaces;
+using Tora.Domain.Exceptions;
 namespace Tora.Application.Features.Auth.Commands.Register;
 
 public class RegisterHandler(IToraDbContext context, 
@@ -19,7 +20,7 @@ public class RegisterHandler(IToraDbContext context,
         if (exists)
         {
             logger.LogWarning("Registeration failed - email already exists {email}", request.Email);
-            throw new Exception("User with this email already exists");
+            throw new ConflictException("User with this email already exists");
         }
 
         var role = await context.Roles

@@ -6,6 +6,7 @@ using Tora.Application.Common.Models;
 using Tora.Application.DTOs.Auth;
 using Tora.Application.Interfaces;
 using Tora.Domain.Entities;
+using Tora.Domain.Exceptions;
 
 namespace Tora.Application.Features.Auth.Commands.Login;
 
@@ -24,11 +25,11 @@ public class LoginHandler(IToraDbContext dbContext,
         if(user == null || !hashingService.Verify(request.Password, user.Password))
         {
             logger.LogWarning("Login failed");
-            throw new BadHttpRequestException("Invalid user credentials");
+            throw new NotFoundException("Invalid user credentials");
         }
         if(user.Role == null)
         {
-            throw new BadHttpRequestException("User role is not loaded");
+            throw new Exception("User role is not loaded");
         }
 
         var newAccessToken = jwtService.GenerateAccessToken(user.Name, 
