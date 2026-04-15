@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace Tora.Api.Middlewares;
 
-public class GloabalExceptionMiddleware(RequestDelegate next, ILogger<GloabalExceptionMiddleware> logger)
+public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExceptionMiddleware> logger)
 {
     public async Task InvokeAsync(HttpContext context)
     {
