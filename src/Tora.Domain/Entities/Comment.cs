@@ -1,13 +1,14 @@
-using System.ComponentModel.DataAnnotations;
+ 
+// To Do update entity with factory methods 
 
 namespace Tora.Domain.Entities;
 
 public class Comment
 {
-    public Guid Id { get; set; }
-    public required string Content { get; set; }
-    public Guid TaskId { get; set; }
-    public Guid UserId { get; set; }
-    public DateTime CreatedAt { get; set; }
+    public Guid Id { get; private set; }
+    public string Content { get; private set; } = default!;
+    public Guid TaskId { get; private set; }
+    public Guid UserId { get; private set; }
+    public DateTime CreatedAt { get; private set; }
 
 }

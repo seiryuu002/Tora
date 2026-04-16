@@ -1,14 +1,15 @@
-using System.ComponentModel.DataAnnotations;
+
+// To Do update entity with factory methods
 
 namespace Tora.Domain.Entities;
 
 public class Project
 {
-    public Guid Id { get; set; }
-    public required string Name { get; set; }
-    public required string Description { get; set; }
-    public Guid OwnerUserId { get; set; }
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
+    public Guid Id { get; private set; }
+    public string Name { get; private set; } = default!;
+    public string Description { get; private set; } = default!;
+    public Guid OwnerUserId { get; private set; }
+    public DateTime StartDate { get; private set; }
+    public DateTime EndDate { get; private set; }
 
 }

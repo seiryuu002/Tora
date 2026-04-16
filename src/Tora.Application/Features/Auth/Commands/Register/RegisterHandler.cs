@@ -28,15 +28,7 @@ public class RegisterHandler(IToraDbContext context,
         
         var hashedPassword = hashingService.Hash(request.Password);
         
-        var user = new Domain.Entities.User
-        {
-            Id = Guid.NewGuid(),
-            Name = request.Name,
-            RoleId = role.Id,
-            Role = role,
-            Email = request.Email,
-            Password = hashedPassword
-        };
+        var user = Domain.Entities.User.Create(request.Name, request.Email, hashedPassword, role.Id);
 
         context.Users.Add(user);
         await context.SaveChangesAsync(ct);

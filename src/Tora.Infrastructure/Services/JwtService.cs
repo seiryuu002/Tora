@@ -11,7 +11,7 @@ public class JwtService(IConfiguration config) : IJwtService
 {
     private readonly IConfiguration _config = config;
 
-    public string GenerateAccessToken(string name, string email, string role)
+    public string GenerateAccessToken(string Id, string name, string email, string role)
     {
         // Implemented JWT token generation logic here
         // This typically involves creating claims based on the user's information,
@@ -19,7 +19,7 @@ public class JwtService(IConfiguration config) : IJwtService
  
         var claims = new List<Claim>
         {
-            new(JwtRegisteredClaimNames.Sub, name),
+            new(JwtRegisteredClaimNames.Sub, Id),
             new(JwtRegisteredClaimNames.Email, email),
             new(ClaimTypes.NameIdentifier, name),
             new(ClaimTypes.Email,email),

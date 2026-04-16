@@ -32,18 +32,13 @@ public class LoginHandler(IToraDbContext dbContext,
             throw new Exception("User role is not loaded");
         }
 
-        var newAccessToken = jwtService.GenerateAccessToken(user.Name, 
-                                                            user.Email, user.Role.UserRole);
+        var newAccessToken = jwtService.GenerateAccessToken(user.Id.ToString(),
+                                                            user.Name, 
+                                                            user.Email, 
+                                                            user.Role.UserRole);
+                                                            
         var newRefreshToken = jwtService.GenerateRefreshToken();
-        var newRefreshTokenEntity = new RefreshToken()
-        {
-            Id = Guid.NewGuid(),
-            Token = hashingService.Hash(newRefreshToken),
-            UserId = user.Id,
-            ExpiryDate = DateTime.UtcNow.AddDays(7),
-            IsRevoked = false,
-            User = user
-        };
+        var newRefreshTokenEntity = RefreshToken.Create(hashingService.Hash(newRefreshToken), user);
 
         dbContext.RefreshTokens.Add(newRefreshTokenEntity);
         await dbContext.SaveChangesAsync(ct);
