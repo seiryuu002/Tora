@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Tora.Application.Interfaces;
 using Tora.Domain.Entities;
@@ -24,14 +25,19 @@ public class DbSeeder(IToraDbContext context, IHashingService hashingService)
 
         // seed a default user with superadmin role
         var superAdminRole = await context.Roles.FirstOrDefaultAsync(u => u.UserRole == "SuperAdmin", ct)?? 
-        throw new NotFoundException("SuperAdmin role not found");
+        throw new InvalidOperationException("SuperAdmin role not found after seeding");
 
-        var exists = await context.Users.AnyAsync(u => u.RoleId == superAdminRole.Id, ct);
+        var superAdminExists = await context.Users.AnyAsync(u => u.RoleId == superAdminRole.Id, ct);
 
-        if(!exists)
+        if(!superAdminExists)
         {
-            var superAdminUser = User.Create("Owner", "superadmin@tora.com", hashingService.Hash("SuperAdmin@12345"), superAdminRole.Id);
-            await context.Users.AddAsync(superAdminUser, ct);
+            var superAdmin = User.Create(
+                name: "Owner", 
+                email: "superadmin@tora.com",
+                hashedPassword: hashingService.Hash("SuperAdmin@12345"),
+                roleId: superAdminRole.Id);
+            
+            await context.Users.AddAsync(superAdmin, ct);
             await context.SaveChangesAsync(ct);
         }
     }
