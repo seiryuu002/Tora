@@ -1,5 +1,5 @@
 # =========================
-# 🔧 Build & Output
+#  Build & Output
 # =========================
 bin/
 obj/
@@ -8,15 +8,11 @@ publish/
 *.txt
 
 # =========================
-# 🧑‍💻 IDE & Editor
+#  IDE & Editor
 # =========================
 .vs/
 .vscode/
-.idea/
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
+
 
 # =========================
 # 📦 NuGet
@@ -26,78 +22,35 @@ packages/
 .nuget/
 
 # =========================
-# 🧪 Testing & Coverage
+#  Testing & Coverage
 # =========================
-TestResults/
-coverage/
-*.coverage
-*.coveragexml
+
 *.http
 
-# =========================
-# 📜 Logs
-# =========================
-logs/
-*.log
 
 # =========================
 # 🌐 Environment & Secrets
 # =========================
-.env
-.env.*
-secrets.json
 appsettings.Development.json
 
-# If you use user secrets
-**/secrets.json
 
 # =========================
 # 🗄️ Database / EF Core
 # =========================
-# DO NOT ignore migrations if you are using Code First
-# Migrations/
-
-# Ignore local DB files if any
 *.db
 *.db-wal
 *.db-shm
 *.sqlite
 *.sqlite3
 
-# =========================
-# 🔐 Security (VERY IMPORTANT)
-# =========================
-# Never push API keys / JWT secrets
-*.key
-*.pem
-*.pfx
 
 # =========================
-# 🖥️ OS Files
+#  Docker 
 # =========================
-.DS_Store
-Thumbs.db
-
-# =========================
-# 🚀 Docker (if you add later)
-# =========================
-docker-compose.override.yml
+docker-compose.yml
 
 # =========================
 # 📁 Temporary Files
 # =========================
 *.tmp
 *.temp
-
-# =========================
-# 📸 Uploads (if your app stores files locally)
-# =========================
-wwwroot/uploads/
-wwwroot/images/uploads/
-
-# =========================
-# ⚙️ Swagger (optional)
-# =========================
-# If you export swagger json locally
-swagger.json
-swagger.yaml
