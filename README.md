@@ -32,8 +32,8 @@ dotnet run --project src/Tora.Api
    ``` GET http://localhost:5124/tora/User?&Page=1&PageSize=10 HTTP/1.1 ```
    
 ## future scope and plan
-1. Unit and integration tests (xUnit + Moq)
+1. Project and Task CRUD endpoints 
 2. Docker + CI/CD pipeline
 3. Deploy to Railway
-4. Project and Task CRUD endpoints
+4. Unit and integration tests (xUnit + Moq)
 
