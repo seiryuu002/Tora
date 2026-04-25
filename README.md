@@ -31,6 +31,7 @@ dotnet run --project src/Tora.Api
 4. To fetch user data
    ``` GET http://localhost:5124/tora/User?&Page=1&PageSize=10 HTTP/1.1 ```
    
+   
 ## future scope and plan
 1. Project and Task CRUD endpoints 
 2. Docker + CI/CD pipeline
