@@ -6,6 +6,7 @@ obj/
 out/
 publish/
 *.txt
+*.user
 
 # =========================
 #  IDE & Editor
