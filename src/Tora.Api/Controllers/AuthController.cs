@@ -17,7 +17,7 @@ namespace Tora.Api.Controllers
 
         [Authorize(Roles = Roles.SuperAdmin)]
         [HttpPost("register")]
-        public async Task<ActionResult<ApiResponse<AuthResponseDto>>> Register(RegisterCommand command)
+        public async Task<ActionResult<ApiResponse<string>>> Register(RegisterCommand command)
         {
             var result = await _mediator.Send(command);
 

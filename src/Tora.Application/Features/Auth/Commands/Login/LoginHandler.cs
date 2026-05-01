@@ -25,11 +25,11 @@ public class LoginHandler(IToraDbContext dbContext,
         if(user == null || !hashingService.Verify(request.Password, user.Password))
         {
             logger.LogWarning("Login failed");
-            throw new NotFoundException("Invalid user credentials");
+            throw new UnauthorizedException("Invalid user credentials");
         }
         if(user.Role == null)
         {
-            throw new Exception("User role is not loaded");
+            throw new InvalidOperationException("User role is not loaded");
         }
 
         var newAccessToken = jwtService.GenerateAccessToken(user.Id.ToString(),
@@ -38,7 +38,11 @@ public class LoginHandler(IToraDbContext dbContext,
                                                             user.Role.UserRole);
                                                             
         var newRefreshToken = jwtService.GenerateRefreshToken();
-        var newRefreshTokenEntity = RefreshToken.Create(hashingService.Hash(newRefreshToken), user);
+        var HashedRefreshToken = hashingService.Hash(newRefreshToken);
+        var newRefreshTokenEntity = RefreshToken.Create(
+                                    rawToken: newRefreshToken, 
+                                    hashedToken: HashedRefreshToken, 
+                                    user);
 
         dbContext.RefreshTokens.Add(newRefreshTokenEntity);
         await dbContext.SaveChangesAsync(ct);

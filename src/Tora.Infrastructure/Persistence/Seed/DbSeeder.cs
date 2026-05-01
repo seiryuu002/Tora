@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Tora.Application.Interfaces;
 using Tora.Domain.Entities;
 using Tora.Domain.Exceptions;
 
 namespace Tora.Infrastructure.Persistence.Seed;
 
-public class DbSeeder(IToraDbContext context, IHashingService hashingService)
+public class DbSeeder(IToraDbContext context, IHashingService hashingService, IConfiguration config)
 {
     public async System.Threading.Tasks.Task SeedAsync(CancellationToken ct)
     {
@@ -31,10 +32,13 @@ public class DbSeeder(IToraDbContext context, IHashingService hashingService)
 
         if(!superAdminExists)
         {
+            var email = config["SuperAdmin:Email"] ?? throw new InvalidOperationException("SuperAdmin email not found in configuration");
+            var password = config["SuperAdmin:Password"] ?? throw new InvalidOperationException("SuperAdmin password not found in configuration");
+            
             var superAdmin = User.Create(
                 name: "Owner", 
-                email: "superadmin@tora.com",
-                hashedPassword: hashingService.Hash("SuperAdmin@12345"),
+                email: email,
+                hashedPassword: hashingService.Hash(password),
                 roleId: superAdminRole.Id);
             
             await context.Users.AddAsync(superAdmin, ct);

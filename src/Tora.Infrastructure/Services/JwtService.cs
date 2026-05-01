@@ -21,8 +21,7 @@ public class JwtService(IConfiguration config) : IJwtService
         {
             new(JwtRegisteredClaimNames.Sub, Id),
             new(JwtRegisteredClaimNames.Email, email),
-            new(ClaimTypes.NameIdentifier, name),
-            new(ClaimTypes.Email,email),
+            new(JwtRegisteredClaimNames.Name, name),
             new(ClaimTypes.Role, role),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };

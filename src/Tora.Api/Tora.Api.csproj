@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
     <ProjectReference Include="..\Tora.Application\Tora.Application.csproj" />
@@ -26,6 +26,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>770d0898-99c7-47d6-90b6-705507a3d71f</UserSecretsId>
   </PropertyGroup>
 
 </Project>

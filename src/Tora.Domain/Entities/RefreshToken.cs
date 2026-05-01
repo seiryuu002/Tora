@@ -14,13 +14,13 @@ public class RefreshToken
 
     private RefreshToken() {}
 
-    public static RefreshToken Create(string hashedToken, User user, int expiryDays = 7)
+    public static RefreshToken Create(string rawToken,string hashedToken, User user, int expiryDays = 7)
     {
         return new RefreshToken
         {
             Id = Guid.NewGuid(),
             Token = hashedToken,
-            TokenPrefix = hashedToken[..8],
+            TokenPrefix = rawToken[..8],
             UserId = user.Id,
             ExpiryDate = DateTime.UtcNow.AddDays(expiryDays),
             IsRevoked = false,

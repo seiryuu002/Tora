@@ -23,8 +23,9 @@ public class UserReadService(ToraDbContext dbContext) : IUserReadService
 
         if (!string.IsNullOrWhiteSpace(role))
         {
-            role = role.ToLower();
-            query = query.Where(u => u.Role!.UserRole == role);
+            query = query.Where(u => 
+            u.Role != null && 
+            u.Role.UserRole.Equals(role, StringComparison.CurrentCultureIgnoreCase));
         }
 
         var totalCount = await query.CountAsync(ct);

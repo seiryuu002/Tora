@@ -15,31 +15,36 @@ public class RefreshTokenHandler(IToraDbContext dbContext,
 {
     public async Task<ApiResponse<AuthResponseDto>> Handle(RefreshTokenCommand request, CancellationToken ct)
     {
-        var hashedtokenPrefix = hashingService.Hash(request.RefreshToken)[..8];
-
+        var prefix = request.RefreshToken.Length >= 8 
+            ? request.RefreshToken[..8] 
+            : throw new UnauthorizedException("Invalid refresh token");
+              
         var Candidates = await dbContext.RefreshTokens
                                    .Include(u=> u.User)
                                    .ThenInclude(u => u.Role)
-                                   .Where(r  => r.TokenPrefix == hashedtokenPrefix 
+                                   .Where(r  => r.TokenPrefix == prefix 
                                             && !r.IsRevoked 
                                             && r.ExpiryDate > DateTime.UtcNow).ToListAsync(ct);
 
         var tokenEntity = Candidates.FirstOrDefault(r => hashingService.Verify(request.RefreshToken, r.Token)) ?? 
-                           throw new NotFoundException("Refresh token is invalid, expired or has been revoked.");
+                           throw new UnauthorizedException("Refresh token is invalid, expired or has been revoked.");
         
         tokenEntity.Revoke();
-        
+
+        var newRefreshToken = jwtService.GenerateRefreshToken();
+        var newHashedRefreshToken = hashingService.Hash(newRefreshToken);
+        var newRefreshTokenEntity = RefreshToken.Create(
+            rawToken: newRefreshToken,
+            hashedToken: newHashedRefreshToken,
+            user: tokenEntity.User
+        );
+
         var newAccessToken = jwtService.GenerateAccessToken(
-                                tokenEntity.User.Id.ToString(),
-                                tokenEntity.User.Name,
-                                tokenEntity.User.Email,
-                                tokenEntity.User.Role!.UserRole);
-
-        var unhashedRefreshToken = jwtService.GenerateRefreshToken();
-        var newHashedRefreshToken = hashingService.Hash(unhashedRefreshToken);
-
-        var newRefreshTokenEntity = RefreshToken.Create(newHashedRefreshToken, tokenEntity.User);
-
+            tokenEntity.User.Id.ToString(),
+            tokenEntity.User.Name,
+            tokenEntity.User.Email,
+            tokenEntity.User.Role!.UserRole 
+        );
 
         dbContext.RefreshTokens.Add(newRefreshTokenEntity);
         await dbContext.SaveChangesAsync(ct);
@@ -47,7 +52,7 @@ public class RefreshTokenHandler(IToraDbContext dbContext,
         return ApiResponse<AuthResponseDto>.SuccessResponse(new AuthResponseDto
         {
             AccessToken = newAccessToken,
-            RefreshToken = unhashedRefreshToken,
+            RefreshToken = newRefreshToken,
             Email = tokenEntity.User.Email,
             Role = tokenEntity.User.Role!.UserRole
         });

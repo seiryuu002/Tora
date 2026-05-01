@@ -1,6 +1,6 @@
-using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Text.Json;
+using FluentValidation;
 using Tora.Domain.Exceptions;
 
 namespace Tora.Api.Middlewares;
@@ -19,10 +19,11 @@ public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExcep
 
             var (statusCode, message) = ex switch
             {
+                UnauthorizedException e => (HttpStatusCode.Unauthorized, e.Message),
                 NotFoundException e => (HttpStatusCode.NotFound, e.Message),
                 ConflictException e => (HttpStatusCode.Conflict, e.Message),
                 ForbiddenException e => (HttpStatusCode.Forbidden, e.Message),
-                ValidationException e => (HttpStatusCode.UnprocessableEntity, string.Join("; ", e.Message)),
+                ValidationException e => (HttpStatusCode.UnprocessableEntity, string.Join("; ", e.Errors.Select( err => err.ErrorMessage))),
                 _ => (HttpStatusCode.InternalServerError, "An unexpected error occured"),
             };
 
@@ -32,12 +33,10 @@ public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExcep
             var response = new
             {
                 Success = false,
-                Message = "Something went wrong while processing your request",
-                Errors = ex is ValidationException ve ? new List<string> {ve.Message} : [message]
+                Message = message,
+                Errors = ex is ValidationException ve ? [.. ve.Errors.Select(e => e.ErrorMessage)] : new List<string> {message}
             };
             await context.Response.WriteAsync(JsonSerializer.Serialize(response));
         }
     }
-    
-
 }
