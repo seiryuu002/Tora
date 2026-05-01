@@ -15,9 +15,12 @@ public static class DependencyInjection
 {
     public static void AddToraDb(this WebApplicationBuilder builder)
     {
-        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")?? 
+                               throw new InvalidOperationException("No 'DefaultConnection' found in configuration");
+        
         builder.Services.AddDbContext<ToraDbContext>(Options => 
-            Options.UseSqlite(connectionString, builder => builder.MigrationsAssembly("Tora.Infrastructure")));
+            Options.UseNpgsql(connectionString, npgsql => npgsql.MigrationsAssembly("Tora.Infrastructure")));
+        
         builder.Services.AddScoped<IToraDbContext>(provider => provider.GetRequiredService<ToraDbContext>());
     }
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
